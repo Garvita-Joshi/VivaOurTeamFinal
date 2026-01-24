@@ -1,0 +1,666 @@
+@import "tailwindcss";
+
+html {
+    scroll-behavior: auto;
+}
+
+@theme {
+    --font-sans: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    --color-brand-orange-light: #fcc096;
+    --color-brand-orange-dark: #fba67b;
+    --color-brand-blue-light: #a6e3ff;
+    --color-brand-blue-dark: #6dd0ff;
+    --color-brand-purple-light: #d1b3ff;
+    --color-brand-purple-dark: #7047eb;
+    --color-brand-border: #9E5D47;
+    --color-v-maroon: #4a0b0a;
+    --color-v-cream: #f9f4e8;
+    --color-v-brown: #9e5d47;
+}
+
+@layer base {
+    body.our-team-page {
+        @apply m-0 p-0 min-h-screen flex flex-col relative overflow-x-hidden bg-[#4a0b0a] text-[#213547] w-full;
+        font-family: var(--font-sans);
+    }
+}
+
+@layer components {
+    .bg-gradient-orange {
+        background:
+            radial-gradient(circle at center, transparent 0%, rgba(93, 42, 28, 0.08) 100%),
+            repeating-conic-gradient(from 0deg at 50% 50%,
+                var(--color-brand-orange-dark) 0deg 10deg,
+                var(--color-brand-orange-light) 10deg 20deg);
+    }
+
+    .bg-gradient-blue {
+        background:
+            radial-gradient(circle at center, transparent 0%, rgba(0, 102, 204, 0.08) 100%),
+            repeating-conic-gradient(from 0deg at 50% 50%,
+                var(--color-brand-blue-dark) 0deg 10deg,
+                var(--color-brand-blue-light) 10deg 20deg);
+    }
+
+    .bg-gradient-purple {
+        background:
+            radial-gradient(circle at center, transparent 0%, rgba(157, 100, 255, 0.1) 100%),
+            repeating-conic-gradient(from 0deg at 50% 50%,
+                #e2d1ff 0deg 10deg,
+                var(--color-brand-purple-light) 10deg 20deg);
+    }
+
+    .orange-theme {
+        background-color: var(--color-brand-orange-light);
+        background-image:
+            radial-gradient(circle at 50% 0%, var(--color-v-maroon) 28px, transparent 29px),
+            radial-gradient(circle at 50% 100%, var(--color-v-maroon) 28px, transparent 29px),
+            radial-gradient(circle at 0% 50%, var(--color-v-maroon) 28px, transparent 29px),
+            radial-gradient(circle at 100% 50%, var(--color-v-maroon) 28px, transparent 29px);
+        background-size: 72px 72px, 72px 72px, 72px 72px, 72px 72px;
+        background-position: 0 0, 0 100%, 0 0, 100% 0;
+        background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    }
+
+    .orange-rays {
+        background-image:
+            radial-gradient(circle at center, transparent 0%, rgba(93, 42, 28, 0.08) 100%),
+            repeating-conic-gradient(from 0deg at 50% 50%,
+                var(--color-brand-orange-dark) 0deg 10deg,
+                var(--color-brand-orange-light) 10deg 20deg);
+    }
+
+    .blue-theme {
+        background-color: var(--color-brand-blue-light);
+        background-image:
+            radial-gradient(circle at 50% 0%, var(--color-v-maroon) 28px, transparent 29px),
+            radial-gradient(circle at 50% 100%, var(--color-v-maroon) 28px, transparent 29px),
+            radial-gradient(circle at 0% 50%, var(--color-v-maroon) 28px, transparent 29px),
+            radial-gradient(circle at 100% 50%, var(--color-v-maroon) 28px, transparent 29px);
+        background-size: 72px 72px, 72px 72px, 72px 72px, 72px 72px;
+        background-position: 0 0, 0 100%, 0 0, 100% 0;
+        background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    }
+
+    .blue-rays {
+        background-image:
+            radial-gradient(circle at center, transparent 0%, rgba(0, 102, 204, 0.08) 100%),
+            repeating-conic-gradient(from 0deg at 50% 50%,
+                var(--color-brand-blue-dark) 0deg 10deg,
+                var(--color-brand-blue-light) 10deg 20deg);
+    }
+
+    .purple-theme {
+        background-color: var(--color-brand-purple-light);
+        background-image:
+            radial-gradient(circle at 50% 0%, var(--color-v-maroon) 28px, transparent 29px),
+            radial-gradient(circle at 50% 100%, var(--color-v-maroon) 28px, transparent 29px),
+            radial-gradient(circle at 0% 50%, var(--color-v-maroon) 28px, transparent 29px),
+            radial-gradient(circle at 100% 50%, var(--color-v-maroon) 28px, transparent 29px);
+        background-size: 72px 72px, 72px 72px, 72px 72px, 72px 72px;
+        background-position: 0 0, 0 100%, 0 0, 100% 0;
+        background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+        box-shadow: inset 0 0 100px rgba(112, 71, 235, 0.1);
+    }
+
+    .purple-rays {
+        background-image:
+            radial-gradient(circle at center, transparent 0%, rgba(157, 100, 255, 0.1) 100%),
+            repeating-conic-gradient(from 0deg at 50% 50%,
+                #e2d1ff 0deg 10deg,
+                var(--color-brand-purple-light) 10deg 20deg);
+    }
+
+    .swing-banner {
+        @apply origin-top animate-[swing_4.5s_ease-in-out_infinite];
+    }
+
+    .lantern-swing {
+        @apply origin-top animate-[lanternSwing_3.5s_ease-in-out_infinite];
+        filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+    }
+
+    .vogue-img-anim-left {
+        @apply origin-bottom;
+        animation: slideUpHandLeft 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    }
+
+    .vogue-img-anim-right {
+        @apply origin-bottom;
+        animation: slideUpHandRight 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    }
+}
+
+@keyframes swing {
+
+    0%,
+    100% {
+        transform: rotate(-2.5deg);
+    }
+
+    50% {
+        transform: rotate(2.5deg);
+    }
+}
+
+@keyframes lanternSwing {
+
+    0%,
+    100% {
+        transform: rotate(-3deg);
+    }
+
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+@keyframes slideUpHandLeft {
+    from {
+        transform: translateY(100%) rotate(-15deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUpHandRight {
+    from {
+        transform: translateY(100%) rotate(15deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) rotate(0);
+        opacity: 1;
+    }
+}
+
+
+@layer utilities {
+    .stamp-border {
+        background-color: transparent;
+        border-radius: 80px;
+        background-image:
+            radial-gradient(circle at 50% 0%, var(--color-v-maroon) 28px, transparent 29px),
+            radial-gradient(circle at 50% 100%, var(--color-v-maroon) 28px, transparent 29px),
+            radial-gradient(circle at 0% 50%, var(--color-v-maroon) 28px, transparent 29px),
+            radial-gradient(circle at 100% 50%, var(--color-v-maroon) 28px, transparent 29px);
+        background-size: 72px 72px;
+        background-position: 0 0, 0 100%, 0 0, 100% 0;
+        background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        height: 100%;
+    }
+
+    .stamp-inner-line {
+        position: absolute;
+        inset: 55px;
+        border: 2px solid var(--color-v-brown);
+        border-radius: 35px;
+        pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+        .stamp-inner-line {
+            inset: 35px;
+            border-radius: 20px;
+        }
+
+        .orange-theme,
+        .blue-theme,
+        .purple-theme {
+            background-size: 36px 36px, 36px 36px, 36px 36px, 36px 36px;
+            background-image:
+                radial-gradient(circle at 50% 0%, var(--color-v-maroon) 14px, transparent 15px),
+                radial-gradient(circle at 50% 100%, var(--color-v-maroon) 14px, transparent 15px),
+                radial-gradient(circle at 0% 50%, var(--color-v-maroon) 14px, transparent 15px),
+                radial-gradient(circle at 100% 50%, var(--color-v-maroon) 14px, transparent 15px);
+        }
+    }
+
+    .label-pill-ticket {
+        background-color: #0099bc;
+        border-radius: 60px;
+        position: relative;
+        padding: 0.4rem 0.7rem 0.3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        border: none;
+        width: 210px;
+        gap: 1px;
+    }
+
+    .label-pill-compact {
+        width: 320px;
+        padding: 0.8rem 0.9rem 0.7rem !important;
+    }
+
+    .label-pill-ticket::before,
+    .label-pill-ticket::after {
+        content: '';
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        height: 4px;
+        background-image: radial-gradient(circle, white 1.2px, transparent 1.5px);
+        background-size: 7px 4px;
+        background-repeat: repeat-x;
+    }
+
+    .label-pill-ticket::before {
+        top: 3px;
+    }
+
+    .label-pill-ticket::after {
+        bottom: 3px;
+    }
+
+    @media (max-width: 768px) {
+        .label-pill-ticket {
+            padding: 0.3rem 0.55rem 0.2rem;
+            width: 150px;
+        }
+
+        .label-pill-compact {
+            width: 180px;
+            padding: 0.45rem 0.6rem 0.35rem !important;
+        }
+
+        .label-pill-ticket::before,
+        .label-pill-ticket::after {
+            height: 3px;
+            background-image: radial-gradient(circle, white 1px, transparent 1.3px);
+            background-size: 6px 3px;
+            left: 10px;
+            right: 10px;
+        }
+
+        .label-pill-ticket::before {
+            top: 4px;
+        }
+
+        .label-pill-ticket::after {
+            bottom: 4px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .label-pill-ticket {
+            padding: 0.25rem 0.45rem 0.15rem;
+            width: 130px;
+            gap: 0px;
+        }
+
+        .label-pill-compact {
+            width: 110px;
+        }
+
+        .label-pill-ticket::before,
+        .label-pill-ticket::after {
+            height: 2px;
+            background-image: radial-gradient(circle, white 0.8px, transparent 1px);
+            background-size: 5px 2px;
+            left: 8px;
+            right: 8px;
+        }
+    }
+
+    @media (min-width: 481px) and (max-width: 767px) {
+        .label-pill-ticket {
+            width: 165px;
+            padding: 0.35rem 0.55rem 0.25rem;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 900px) {
+        .label-pill-ticket {
+            width: 175px;
+            padding: 0.35rem 0.6rem 0.25rem;
+        }
+    }
+
+    @media (min-width: 901px) and (max-width: 1023px) {
+        .label-pill-ticket {
+            width: 140px;
+            padding: 0.3rem 0.45rem 0.2rem;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .label-pill-ticket {
+            width: 13vw;
+            padding: 0.5rem 0.8rem 0.4rem;
+        }
+
+        .label-pill-compact {
+            width: 18vw;
+            padding: 0.9rem 0.9rem 0.8rem !important;
+        }
+    }
+
+    @media (min-width: 1536px) {
+        .label-pill-ticket {
+            width: 16vw;
+            padding: 0.6rem 0.9rem 0.5rem;
+        }
+
+        .label-pill-compact {
+            width: 13vw !important;
+            padding: 0.5rem 0.75rem 0.4rem !important;
+        }
+    }
+
+    .label-pill-ticket-purple {
+        background-color: #9d00cc;
+        border-radius: 60px;
+        position: relative;
+        padding: 0.4rem 0.9rem 0.3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        border: none;
+        width: 280px;
+        gap: 1px;
+    }
+
+    .label-pill-ticket-purple::before,
+    .label-pill-ticket-purple::after {
+        content: '';
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        height: 4px;
+        background-image: radial-gradient(circle, white 1.2px, transparent 1.5px);
+        background-size: 7px 4px;
+        background-repeat: repeat-x;
+    }
+
+    .label-pill-ticket-purple::before {
+        top: 3px;
+    }
+
+    .label-pill-ticket-purple::after {
+        bottom: 3px;
+    }
+
+    @media (max-width: 768px) {
+        .label-pill-ticket-purple {
+            padding: 0.3rem 0.7rem 0.2rem;
+            width: 200px;
+        }
+
+        .label-pill-ticket-purple::before,
+        .label-pill-ticket-purple::after {
+            height: 3px;
+            background-image: radial-gradient(circle, white 1px, transparent 1.3px);
+            background-size: 6px 3px;
+            left: 10px;
+            right: 10px;
+        }
+
+        .label-pill-ticket-purple::before {
+            top: 4px;
+        }
+
+        .label-pill-ticket-purple::after {
+            bottom: 4px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .label-pill-ticket-purple {
+            padding: 0.25rem 0.55rem 0.15rem;
+            width: 165px;
+            gap: 0px;
+        }
+
+        .label-pill-ticket-purple::before,
+        .label-pill-ticket-purple::after {
+            height: 2px;
+            background-image: radial-gradient(circle, white 0.8px, transparent 1px);
+            background-size: 5px 2px;
+            left: 8px;
+            right: 8px;
+        }
+    }
+
+    @media (min-width: 481px) and (max-width: 767px) {
+        .label-pill-ticket-purple {
+            width: 210px;
+            padding: 0.35rem 0.7rem 0.25rem;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 900px) {
+        .label-pill-ticket-purple {
+            width: 230px;
+            padding: 0.35rem 0.8rem 0.25rem;
+        }
+    }
+
+    @media (min-width: 901px) and (max-width: 1023px) {
+        .label-pill-ticket-purple {
+            width: 185px;
+            padding: 0.3rem 0.65rem 0.2rem;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .label-pill-ticket-purple {
+            width: 17vw;
+            padding: 0.5rem 1rem 0.4rem;
+        }
+    }
+
+    @media (min-width: 1536px) {
+        .label-pill-ticket-purple {
+            width: 20vw;
+            padding: 0.6rem 1.1rem 0.5rem;
+        }
+    }
+
+
+    .label-pill-ticket-purple.label-pill-compact {
+        width: 320px;
+        padding: 0.8rem 0.9rem 0.7rem !important;
+    }
+
+    @media (max-width: 768px) {
+        .label-pill-ticket-purple.label-pill-compact {
+            width: 180px;
+            padding: 0.55rem 0.6rem 0.45rem !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .label-pill-ticket-purple.label-pill-compact {
+            width: 160px;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .label-pill-ticket-purple.label-pill-compact {
+            width: 18vw;
+            padding: 0.9rem 0.9rem 0.8rem !important;
+        }
+    }
+
+    @media (min-width: 1536px) {
+        .label-pill-ticket-purple.label-pill-compact {
+            width: 13vw !important;
+            padding: 0.5rem 0.75rem 0.4rem !important;
+        }
+    }
+
+    .label-pill-ticket-orange {
+        background-color: #ff8c42;
+        border-radius: 60px;
+        position: relative;
+        padding: 0.4rem 0.7rem 0.3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        border: none;
+        width: 210px;
+        gap: 1px;
+    }
+
+    .label-pill-ticket-orange::before,
+    .label-pill-ticket-orange::after {
+        content: '';
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        height: 4px;
+        background-image: radial-gradient(circle, white 1.2px, transparent 1.5px);
+        background-size: 7px 4px;
+        background-repeat: repeat-x;
+    }
+
+    .label-pill-ticket-orange::before {
+        top: 3px;
+    }
+
+    .label-pill-ticket-orange::after {
+        bottom: 3px;
+    }
+
+    @media (min-width: 640px) {
+        .label-pill-ticket-orange {
+            width: 240px;
+            padding: 0.5rem 0.8rem 0.4rem;
+        }
+
+        .label-pill-ticket-orange::before,
+        .label-pill-ticket-orange::after {
+            left: 16px;
+            right: 16px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .label-pill-ticket-orange {
+            width: 250px;
+            padding: 0.55rem 0.85rem 0.45rem;
+        }
+
+        .label-pill-ticket-orange::before,
+        .label-pill-ticket-orange::after {
+            left: 18px;
+            right: 18px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .label-pill-ticket-orange {
+            width: 280px;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .label-pill-ticket-orange {
+            width: 20vw;
+        }
+    }
+
+    @media (min-width: 1536px) {
+        .label-pill-ticket-orange {
+            width: 24vw;
+        }
+    }
+
+    .label-pill-ticket-orange.label-pill-compact {
+        width: 320px;
+        padding: 0.8rem 0.9rem 0.7rem !important;
+    }
+
+    @media (min-width: 640px) {
+        .label-pill-ticket-orange.label-pill-compact {
+            width: 200px;
+            padding: 0.4rem 0.7rem 0.3rem !important;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .label-pill-ticket-orange.label-pill-compact {
+            width: 180px;
+            padding: 0.45rem 0.6rem 0.35rem !important;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .label-pill-ticket-orange.label-pill-compact {
+            width: 230px;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .label-pill-ticket-orange.label-pill-compact {
+            width: 18vw !important;
+            padding: 0.9rem 0.9rem 0.8rem !important;
+        }
+    }
+
+    @media (min-width: 1536px) {
+        .label-pill-ticket-orange.label-pill-compact {
+            width: 13vw !important;
+            padding: 0.5rem 0.75rem 0.4rem !important;
+        }
+    }
+
+
+
+    body.our-team-page.hide-frame-bottom::after {
+        border-bottom-width: 0 !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        bottom: 0 !important;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    body.our-team-page.hide-frame-top::after {
+        border-top-width: 0 !important;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        top: 0 !important;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    .section-no-bottom-border .relative {
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+    }
+
+    .section-no-bottom-border .stamp-inner-line {
+        border-bottom: none !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        bottom: 0 !important;
+    }
+
+    .section-no-top-border .relative {
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        margin-top: -2px;
+    }
+
+    .section-no-top-border .stamp-inner-line {
+        border-top: none !important;
+        border-top-left-radius: 0 !important;
+        border-top-right-radius: 0 !important;
+        top: 0 !important;
+    }
+}
