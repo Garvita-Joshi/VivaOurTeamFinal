@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+.countdown-section {
+    width: 100%;
+    min-height: 50vh;
+    background-color: #061b33;
+    /* Dark Navy Blue */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+/* Optional: Add some Rajasthani pattern or subtle texture */
+.countdown-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.1;
+    background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
+    /* Subtle texture */
+    pointer-events: none;
+}
+
+.countdown-title {
+    font-family: 'Gill Sans', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.countdown-timer {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.timer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+}
+
+.timer-value {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+    font-family: 'Gill Sans', sans-serif;
+}
+
+.timer-label {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 0.5rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .countdown-title {
+        font-size: 2rem;
+    }
+
+    .timer-value {
+        font-size: 2.5rem;
+    }
+
+    .timer-item {
+        min-width: 80px;
+    }
+}

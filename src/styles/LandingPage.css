@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+.landing-page-container {
+    width: 100%;
+    background-color: #FDDEC0;
+    overflow-x: hidden;
+}
+
+.transition-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FDDEC0;
+    overflow: hidden;
+}
+
+.reveal-container {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    overflow: visible;
+}
+
+.reveal-item {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+}
+
+.reveal-item[style*="opacity: 1"],
+.reveal-item[style*="opacity: 0.9"],
+.reveal-item[style*="opacity: 0.8"] {
+    pointer-events: auto;
+}
+
+.stamp-assembly {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    pointer-events: none;
+}
+
+/* The container for the door/gate - now full screen for unconfined zoom */
+.white-stamp-container {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    z-index: 10;
+}
+
+/* Common stacking logic for children */
+.white-stamp-container>* {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: 100%;
+}
+
+.bg-door-frame {
+    object-fit: cover;
+    z-index: 1;
+    display: block;
+}
+
+.door-canvas-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.gate-visual {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform-origin: center center;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.zoom-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 20%, #FDDEC0 100%);
+    z-index: 15;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .white-stamp-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        padding: 0;
+        /* Full screen on very small mobile? Or keep border? */
+    }
+
+    .white-stamp-container {
+        /* User asked for 92% previously, let's keep it consistent or adapt */
+        width: 92%;
+        height: 92%;
+        border-radius: 20px;
+        padding: 8px;
+    }
+
+    .white-stamp-container>* {
+        border-radius: 14px;
+    }
+}
