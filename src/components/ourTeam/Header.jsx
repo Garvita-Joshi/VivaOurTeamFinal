@@ -21,17 +21,17 @@ const Header = () => {
 
     return (
         <>
-            <header className="w-full flex flex-row justify-between items-start z-50 pt-6 sm:pt-8 md:pt-10 lg:pt-12 px-3 lg:px-3 xl:px-12 2xl:px-20 relative">
-                <div className="flex-shrink-0 z-50 relative mt-6 ml-6 md:mt-0 md:ml-0">
+            <header className="w-full flex flex-row justify-between items-start z-50 pt-4 sm:pt-6 md:pt-8 lg:pt-10 px-2 lg:px-2 xl:px-10 2xl:px-16 relative">
+                <div className="flex-shrink-0 z-50 relative mt-6 ml-3 md:mt-0 md:ml-0">
                     <img src={vivaLogo} alt="Vivacity'26 Logo" className="h-[40px] sm:h-[75px] md:h-[95px] lg:h-[125px] w-auto transition-all" />
                 </div>
 
-                <nav className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-10 pt-2 sm:pt-3 md:pt-4">
+                <nav className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-10 pt-3 sm:pt-5 md:pt-6 mr-2 sm:mr-4 md:mr-6">
                     <a href="#home" className="no-underline text-[#3d1c10] font-semibold text-[0.8rem] lg:text-[0.95rem] xl:text-[1.15rem] tracking-wider hover:text-[#9E5D47] transition-colors">HOME</a>
                     <a href="#events" className="no-underline text-[#3d1c10] font-semibold text-[0.8rem] lg:text-[0.95rem] xl:text-[1.15rem] tracking-wider hover:text-[#9E5D47] transition-colors">EVENTS</a>
                     <a href="#sponsors" className="no-underline text-[#3d1c10] font-semibold text-[0.8rem] lg:text-[0.95rem] xl:text-[1.15rem] tracking-wider hover:text-[#9E5D47] transition-colors">SPONSORS</a>
                     <a href="#team" className="no-underline text-[#3d1c10] font-semibold text-[0.8rem] lg:text-[0.95rem] xl:text-[1.15rem] tracking-wider hover:text-[#9E5D47] transition-colors">OUR TEAM</a>
-                </nav>
+                </nav >
 
                 <div className="md:hidden z-50 relative mt-6 mr-6">
                     <button onClick={() => setMenuOpen(!menuOpen)} className="flex flex-col gap-1.5 p-2 focus:outline-none">
@@ -40,7 +40,7 @@ const Header = () => {
                         <span className={`block w-6 h-0.5 bg-[#3d1c10] transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
                     </button>
                 </div>
-            </header>
+            </header >
 
             <div ref={menuRef} className="fixed inset-0 bg-[#f7d0ab] z-40 flex flex-col justify-center items-center md:hidden translate-x-full">
                 <nav ref={linksRef} className="flex flex-col gap-8 text-center">

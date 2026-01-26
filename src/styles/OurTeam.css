@@ -240,8 +240,8 @@ html {
     }
 
     .label-pill-compact {
-        width: 320px;
-        padding: 0.8rem 0.9rem 0.7rem !important;
+        padding: 1.4rem 1.2rem 1.3rem !important;
+        gap: 6px !important;
     }
 
     .label-pill-ticket::before,

@@ -17,16 +17,16 @@ const PhotoCard = ({ imageUrl, name, role, size = "normal", theme = "blue" }) =>
     const getSizeClasses = () => {
         if (size === "small") {
             return {
-                image: "w-[72px] sm:w-[100px] md:w-[100px] lg:w-[124px] xl:w-[11.5vw] 2xl:w-[13.5vw]",
+                image: "w-[82px] sm:w-[110px] md:w-[110px] lg:w-[138px] xl:w-[12.8vw] 2xl:w-[14.8vw]",
                 bottom: "-bottom-[38px] sm:-bottom-[50px] md:-bottom-[45px] lg:-bottom-[50px] xl:-bottom-[75px] 2xl:-bottom-[95px]",
                 icon: "w-5 h-5 sm:w-6 sm:h-6 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-[2.5vw] xl:h-[2.5vw] 2xl:w-[3vw] 2xl:h-[3vw]",
-                name: "text-[0.45rem] sm:text-[0.6rem] md:text-[0.7rem] lg:text-[0.8rem] xl:text-[0.9vw] 2xl:text-[1.1vw]",
-                role: "text-[0.35rem] sm:text-[0.5rem] md:text-[0.6rem] lg:text-[0.7rem] xl:text-[0.7vw] 2xl:text-[0.9vw]",
+                name: "text-[0.38rem] sm:text-[0.48rem] md:text-[0.58rem] lg:text-[0.65rem] xl:text-[0.65vw] 2xl:text-[0.85vw]",
+                role: "text-[0.28rem] sm:text-[0.38rem] md:text-[0.48rem] lg:text-[0.55rem] xl:text-[0.45vw] 2xl:text-[0.65vw]",
                 labelClass: "label-pill-compact"
             };
         } else if (size === "medium") {
             return {
-                image: "w-[78px] sm:w-[108px] md:w-[108px] lg:w-[132px] xl:w-[12.2vw] 2xl:w-[14.5vw]",
+                image: "w-[90px] sm:w-[122px] md:w-[122px] lg:w-[150px] xl:w-[13.8vw] 2xl:w-[15.8vw]",
                 bottom: "-bottom-[42px] sm:-bottom-[54px] md:-bottom-[50px] lg:-bottom-[54px] xl:-bottom-[82px] 2xl:-bottom-[105px]",
                 icon: "w-[21px] h-[21px] sm:w-7 sm:h-7 md:w-7 md:h-7 lg:w-8 lg:h-8 xl:w-[2.7vw] xl:h-[2.7vw] 2xl:w-[3.3vw] 2xl:h-[3.3vw]",
                 name: "text-[0.5rem] sm:text-[0.65rem] md:text-[0.75rem] lg:text-[0.88rem] xl:text-[0.95vw] 2xl:text-[1.15vw]",
@@ -35,7 +35,7 @@ const PhotoCard = ({ imageUrl, name, role, size = "normal", theme = "blue" }) =>
             };
         } else {
             return {
-                image: "w-[100px] sm:w-[130px] md:w-[130px] lg:w-[155px] xl:w-[15vw] 2xl:w-[18vw]",
+                image: "w-[108px] sm:w-[140px] md:w-[140px] lg:w-[165px] xl:w-[16vw] 2xl:w-[19vw]",
                 bottom: "-bottom-[45px] sm:-bottom-[58px] md:-bottom-[54px] lg:-bottom-[58px] xl:-bottom-[90px] 2xl:-bottom-[115px]",
                 icon: "w-6 h-6 sm:w-8 sm:h-8 md:w-8 md:h-8 lg:w-9 lg:h-9 xl:w-[3.2vw] xl:h-[3.2vw] 2xl:w-[3.8vw] 2xl:h-[3.8vw]",
                 name: "text-[0.65rem] sm:text-[0.7rem] md:text-[0.85rem] lg:text-[1rem] xl:text-[1.1vw] 2xl:text-[1.3vw]",
@@ -55,7 +55,7 @@ const PhotoCard = ({ imageUrl, name, role, size = "normal", theme = "blue" }) =>
     useLayoutEffect(() => {
         const updateWidth = () => {
             if (cardRef.current) {
-                const multiplier = window.innerWidth < 640 ? 1.05 : 2.1;
+                const multiplier = window.innerWidth < 640 ? 2.2 : 3.8;
                 setLabelWidth(cardRef.current.offsetWidth * multiplier);
             }
         };
@@ -86,6 +86,11 @@ const PhotoCard = ({ imageUrl, name, role, size = "normal", theme = "blue" }) =>
         return `label-pill-ticket ${baseClass}`;
     };
 
+    const isLongName = name && name.length >= 11;
+    const nameDisplaySize = isLongName
+        ? "text-[0.32rem] sm:text-[0.42rem] md:text-[0.52rem] lg:text-[0.6rem] xl:text-[0.55vw] 2xl:text-[0.75vw]"
+        : nameTextSize;
+
     return (
         <div className="relative flex flex-col items-center">
             <div ref={cardRef} className={`relative flex items-center bg-white p-[1.5px] sm:p-[2px] md:p-[2.5px] rounded-[12px] sm:rounded-[15px] md:rounded-[18px] shadow-xl transform transition-transform hover:scale-105`}>
@@ -103,13 +108,13 @@ const PhotoCard = ({ imageUrl, name, role, size = "normal", theme = "blue" }) =>
                     </a>
 
                     <div
-                        className={getLabelClass()}
+                        className={`${getLabelClass()} px-4 text-center`}
                         style={{ width: labelWidth }}
                     >
-                        <div className={`${nameTextSize} text-white font-semibold tracking-wider leading-[1.1] uppercase font-sans whitespace-nowrap`}>
+                        <div className={`${nameDisplaySize} text-white font-bold tracking-wider leading-[1.1] uppercase font-sans whitespace-nowrap`}>
                             {name}
                         </div>
-                        <div className={`${roleTextSize} text-white/95 font-normal tracking-[0.12em] uppercase font-sans leading-tight text-center`}>
+                        <div className={`${roleTextSize} text-white/95 font-normal tracking-[0.12em] uppercase font-sans leading-tight`}>
                             {role}
                         </div>
                     </div>

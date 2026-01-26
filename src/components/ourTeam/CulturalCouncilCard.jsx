@@ -16,13 +16,13 @@ const CulturalCouncilCard = ({ imageUrl, name, role }) => {
 
     const iconWidthClasses = "w-5 h-5 sm:w-6 sm:h-6 md:w-6 md:h-6 lg:w-7 lg:h-7 xl:w-[2.5vw] xl:h-[2.5vw] 2xl:w-[3vw] 2xl:h-[3vw]";
 
-    const nameTextSize = "text-[0.6rem] sm:text-[0.6rem] md:text-[0.7rem] lg:text-[0.8rem] xl:text-[0.9vw] 2xl:text-[1.1vw]";
-    const roleTextSize = "text-[0.5rem] sm:text-[0.5rem] md:text-[0.6rem] lg:text-[0.7rem] xl:text-[0.7vw] 2xl:text-[0.9vw]";
+    const nameTextSize = "text-[0.4rem] sm:text-[0.4rem] md:text-[0.5rem] lg:text-[0.6rem] xl:text-[0.7vw] 2xl:text-[0.9vw]";
+    const roleTextSize = "text-[0.3rem] sm:text-[0.3rem] md:text-[0.4rem] lg:text-[0.5rem] xl:text-[0.5vw] 2xl:text-[0.7vw]";
 
     useLayoutEffect(() => {
         const updateWidth = () => {
             if (cardRef.current) {
-                const multiplier = window.innerWidth < 640 ? 1.8 : 2.1;
+                const multiplier = window.innerWidth < 640 ? 2.2 : 3.8;
                 setLabelWidth(cardRef.current.offsetWidth * multiplier);
             }
         };
@@ -31,6 +31,11 @@ const CulturalCouncilCard = ({ imageUrl, name, role }) => {
         window.addEventListener('resize', updateWidth);
         return () => window.removeEventListener('resize', updateWidth);
     }, []);
+
+    const isLongName = name && name.length >= 11;
+    const nameDisplaySize = isLongName
+        ? "text-[0.32rem] sm:text-[0.32rem] md:text-[0.42rem] lg:text-[0.5rem] xl:text-[0.55vw] 2xl:text-[0.75vw]"
+        : nameTextSize;
 
     return (
         <div className="relative flex flex-col items-center">
@@ -48,10 +53,10 @@ const CulturalCouncilCard = ({ imageUrl, name, role }) => {
                 </a>
 
                 <div
-                    className="label-pill-ticket-purple label-pill-compact"
+                    className="label-pill-ticket-purple label-pill-compact px-4 text-center"
                     style={{ width: labelWidth }}
                 >
-                    <div className={`${nameTextSize} text-white font-semibold tracking-wider leading-[1.1] uppercase font-sans whitespace-nowrap`}>
+                    <div className={`${nameDisplaySize} text-white font-bold tracking-wider leading-[1.1] uppercase font-sans whitespace-nowrap`}>
                         {name}
                     </div>
                     <div className={`${roleTextSize} text-white/95 font-normal tracking-[0.12em] uppercase font-sans leading-tight text-center`}>

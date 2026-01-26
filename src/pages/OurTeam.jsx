@@ -59,6 +59,8 @@ function OurTeam() {
     const rickshawRight7Ref = useRef(null)
     const lanternLeftOperationalRef = useRef(null)
     const lanternRightOperationalRef = useRef(null)
+    const rickshawLeft9Ref = useRef(null)
+    const rickshawRight9Ref = useRef(null)
     const vogue5Ref = useRef(null)
     const vogue6Ref = useRef(null)
     const vogue7Ref = useRef(null)
@@ -128,121 +130,83 @@ function OurTeam() {
     }, [])
 
     useLayoutEffect(() => {
-        // Reset defaults to window for standard scrolling
         ScrollTrigger.defaults({ scroller: window });
 
-        if (vogue1Ref.current && vogue2Ref.current) {
-            gsap.fromTo([vogue1Ref.current, vogue2Ref.current],
-                { y: 100, opacity: 0 },
-                { y: 0, opacity: 1, duration: 2.5, ease: "power3.out", delay: 0.2 }
-            );
-        }
+        const revealSet = [
+            { hands: [vogue1Ref, vogue2Ref], section: section1Ref },
+            { hands: [vogue3Ref, vogue4Ref], section: section6Ref },
+            { hands: [vogue5Ref, vogue6Ref], section: section8Ref },
+            { ships: [rickshawLeftRef, rickshawRightRef], section: section3Ref },
+            { ships: [rickshawLeft7Ref, rickshawRight7Ref], section: section7Ref },
+            { ships: [rickshawLeft9Ref, rickshawRight9Ref], section: section9Ref }
+        ];
 
-        if (vogue1Ref.current && vogue2Ref.current && section1Ref.current) {
-            const getHandMovement = () => {
-                const vw = window.innerWidth;
-                if (vw < 480) return 300;
-                if (vw < 768) return 400;
-                return 500;
-            };
+        // Initial setup - hide everything
+        revealSet.forEach(item => {
+            const elements = item.hands || item.ships;
+            if (elements[0].current && elements[1].current) {
+                gsap.set(elements[0].current, { opacity: 0, y: 100 });
+                gsap.set(elements[1].current, { opacity: 0, y: 100 });
 
-            const handMovement = getHandMovement();
-
-            gsap.fromTo(vogue1Ref.current, { x: 0 }, {
-                x: -handMovement,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: section1Ref.current,
-                    start: "bottom bottom",
-                    end: "bottom 60%",
-                    scrub: true
+                // Specifically flip left side rickshaws
+                if (item.ships) {
+                    gsap.set(elements[0].current, { scaleX: -1 });
                 }
-            });
+            }
+        });
 
-            gsap.fromTo(vogue2Ref.current, { x: 0 }, {
-                x: handMovement,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: section1Ref.current,
-                    start: "bottom bottom",
-                    end: "bottom 60%",
-                    scrub: true
-                }
-            });
-        }
+        const getMovement = () => {
+            const vw = window.innerWidth;
+            if (vw < 480) return 300;
+            if (vw < 768) return 400;
+            return 500;
+        };
 
-        // Scroll reveal animation removed for section 2 banners and lanterns
+        // Create individual animations for each section
+        revealSet.forEach(item => {
+            const elements = item.hands || item.ships;
+            const left = elements[0].current;
+            const right = elements[1].current;
+            const triggerSection = item.section.current;
 
-        // Scroll reveal animations removed for all banners and lanterns to keep them constant
+            if (left && right && triggerSection) {
+                // Entry animation (Slide up and fade in)
+                gsap.fromTo([left, right],
+                    { opacity: 0, y: 100 },
+                    { opacity: 1, y: 0, duration: 2, ease: "power3.out", delay: 0.3 }
+                );
 
-        // Scroll reveal animation removed for section 4 banners and lanterns
+                // Scrub animation (Spread outward)
+                const movement = getMovement();
 
+                gsap.to(left, {
+                    x: -movement,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: triggerSection,
+                        start: "bottom bottom",
+                        end: "bottom 40%",
+                        scrub: true
+                    }
+                });
 
-
-        if (section6Ref.current) {
-            gsap.set([vogue3Ref.current, vogue4Ref.current], { opacity: 0, y: 100 });
-
-            ScrollTrigger.create({
-                trigger: section6Ref.current,
-                start: "top 95%",
-                end: "bottom 5%",
-                onEnter: () => {
-                    gsap.to([vogue3Ref.current, vogue4Ref.current], { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" });
-                },
-                onLeave: () => {
-                    gsap.to([vogue3Ref.current, vogue4Ref.current], { opacity: 0, duration: 0.3 });
-                },
-                onEnterBack: () => {
-                    gsap.to([vogue3Ref.current, vogue4Ref.current], { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" });
-                },
-                onLeaveBack: () => {
-                    gsap.to([vogue3Ref.current, vogue4Ref.current], { opacity: 0, duration: 0.3 });
-                }
-            });
-
-            // Section 6 Hand Scroll Animation (Sideways)
-            const getHandMovement = () => {
-                const vw = window.innerWidth;
-                if (vw < 480) return 300;
-                if (vw < 768) return 400;
-                return 500;
-            };
-
-            const handMovement = getHandMovement();
-
-            gsap.fromTo(vogue3Ref.current, { x: 0 }, {
-                x: -handMovement,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: section6Ref.current,
-                    start: "top center",
-                    end: "bottom top",
-                    scrub: 1
-                }
-            });
-
-            gsap.fromTo(vogue4Ref.current, { x: 0 }, {
-                x: handMovement,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: section6Ref.current,
-                    start: "top center",
-                    end: "bottom top",
-                    scrub: 1
-                }
-            });
-        }
-
-        // Rickshaw animations removed
-
-        // Scroll reveal animations removed
-
-
+                gsap.to(right, {
+                    x: movement,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: triggerSection,
+                        start: "bottom bottom",
+                        end: "bottom 40%",
+                        scrub: true
+                    }
+                });
+            }
+        });
 
         return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-        }
-    }, [])
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        };
+    }, []);
 
     useLayoutEffect(() => {
         const handleResize = () => { ScrollTrigger.refresh() }
@@ -255,7 +219,7 @@ function OurTeam() {
         banner1Ref, banner2Ref, banner3Ref, banner4Ref, banner6Ref, banner7Ref, banner8Ref, banner9Ref,
         vogue1Ref, vogue2Ref, vogue3Ref, vogue4Ref, vogue5Ref, vogue6Ref, vogue7Ref, vogue8Ref,
         lanternLeftRef, lanternRightRef, lanternLeftSponsorRef, lanternRightSponsorRef, lanternLeftOperationalRef, lanternRightOperationalRef,
-        rickshawLeftRef, rickshawRightRef, rickshawLeft7Ref, rickshawRight7Ref
+        rickshawLeftRef, rickshawRightRef, rickshawLeft7Ref, rickshawRight7Ref, rickshawLeft9Ref, rickshawRight9Ref
     })
 
     return (

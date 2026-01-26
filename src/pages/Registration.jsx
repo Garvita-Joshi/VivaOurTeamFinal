@@ -6,6 +6,18 @@ import doorOnlyPng from '../assets/registration/door_only.png'
 import nextButton from '../assets/registration/next.png'
 import preRegisterImg from '../assets/registration/Pre register here.png'
 
+const eventData = {
+    "Drama Events": ["Gully Gully", "Halla Bol", "Natyatumb", "Manchpan"],
+    "Art Events": ["Hue-niverse", "Contrasto", "Eclectic", "Tattoo Tales", "Splash"],
+    "Music Events": ["Swar-Sangam", "Pitch-Perfect", "Dhun", "Vocal-Vibes"],
+    "Quizzing Events": ["General Quiz", "Pop-Culture Quiz", "Tech Quiz"],
+    "Dance Events": ["Groove", "Step-Up", "Mudrangan", "Folk-Feet"],
+    "Nukkad Events": ["Street-Beat"],
+    "Speaking Arts": ["Words-Worth", "Kavi-Sammelan", "Elocution"],
+    "Photography & Videography Events": ["Snap-Shot", "Reel-It"],
+    "Fashion Events": ["Vogue-Walk"]
+};
+
 const Registration = () => {
     const [step, setStep] = useState(1)
     const [showGif, setShowGif] = useState(true)
@@ -16,10 +28,12 @@ const Registration = () => {
         email: '',
         university: '',
         referral: '',
-        participant: ''
+        participant: '',
+        eventCategory: '',
+        eventName: ''
     })
     const [errors, setErrors] = useState({})
-    const [formVisible, setFormVisible] = useState(false)
+
     const [gifSrc, setGifSrc] = useState(null)
 
     useEffect(() => {
@@ -36,6 +50,7 @@ const Registration = () => {
             if (pngLoaded && doorOnlyLoaded) {
                 setGifSrc(`${doorGif}?t=${Date.now()}`)
             }
+
         }
 
         pngImg.onload = () => {
@@ -58,9 +73,6 @@ const Registration = () => {
     useEffect(() => {
         if (!gifSrc) return
 
-        // Start form fade-in immediately when GIF starts
-        setFormVisible(true)
-
         // Start fading in the PNG near the end of the GIF
         const pngTimer = setTimeout(() => {
             setShowPng(true)
@@ -79,7 +91,14 @@ const Registration = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target
-        setFormData(prev => ({ ...prev, [name]: value }))
+        setFormData(prev => {
+            const newData = { ...prev, [name]: value };
+            // If category changes, reset event name
+            if (name === 'eventCategory') {
+                newData.eventName = '';
+            }
+            return newData;
+        })
         if (errors[name]) {
             setErrors(prev => ({ ...prev, [name]: '' }))
         }
@@ -98,6 +117,9 @@ const Registration = () => {
             if (!formData.university.trim()) newErrors.university = 'University name is required'
         } else if (step === 2) {
             if (!formData.participant) newErrors.participant = 'Please select an option'
+        } else if (step === 3) {
+            if (!formData.eventCategory) newErrors.eventCategory = 'Please select a category'
+            if (!formData.eventName) newErrors.eventName = 'Please select an event'
         }
         return newErrors
     }
@@ -113,8 +135,15 @@ const Registration = () => {
 
         if (step === 1) {
             setStep(2)
+        } else if (step === 2) {
+            if (formData.participant === 'yes') {
+                setStep(3)
+            } else {
+                console.log('Final Form Data (Non-participant):', formData)
+                alert('Registration Complete!')
+            }
         } else {
-            console.log('Final Form Data:', formData)
+            console.log('Final Form Data (Participant):', formData)
             alert('Registration Complete!')
         }
     }
@@ -136,10 +165,10 @@ const Registration = () => {
                         />
                     )}
 
-                    <div className={`absolute left-1/2 -translate-x-1/2 w-[38%] max-w-105 max-h-[65%] flex flex-col z-10 overflow-y-visible py-2.5 transition-all ease-out max-[1024px]:w-[36%] max-[1024px]:top-[49%] max-[768px]:w-[52%] max-[768px]:top-[48%] max-[480px]:w-[65%] max-[480px]:top-[46%] ${step === 2
+                    <div className={`absolute left-1/2 -translate-x-1/2 w-[38%] max-w-105 max-h-[65%] flex flex-col z-40 overflow-y-visible py-2.5 transition-all ease-out max-[1024px]:w-[36%] max-[1024px]:top-[44%] max-[768px]:w-[52%] max-[768px]:top-[42%] max-[480px]:w-[65%] max-[480px]:top-[41%] ${step === 2
                         ? 'top-[34%] items-start'
-                        : 'top-1/2 items-center'
-                        } ${formVisible ? 'opacity-100 -translate-y-1/2' : 'opacity-0 -translate-y-[45%]'}`}>
+                        : step === 3 ? 'top-[32%] items-center' : 'top-[31%] items-center'
+                        } opacity-0 animate-formSlow`}>
                         {step === 1 ? (
                             <>
                                 <img src={preRegisterImg} alt="Pre Register Here" className="w-full max-w-80 mx-auto mt-4 mb-4 block h-auto max-[480px]:max-w-77.5 max-[480px]:mb-3 max-[480px]:mt-2.5" />
@@ -169,8 +198,8 @@ const Registration = () => {
                                     ))}
                                 </form>
                             </>
-                        ) : (
-                            <div className="w-full h-full text-left p-1.25 flex flex-col justify-start items-start">
+                        ) : step === 2 ? (
+                            <div className="w-full h-full text-left p-1.25 flex flex-col justify-start items-start pt-16">
                                 <h2 className="text-white font-gill text-[25px] font-extralight mb-5 tracking-[0.5px] leading-[1.2] max-[768px]:text-[22px] max-[480px]:text-[20px]">
                                     ARE YOU A PARTICIPANT?
                                 </h2>
@@ -196,18 +225,63 @@ const Registration = () => {
                                     {errors.participant && <span className="text-[#ff4d4d] text-[11px] font-gill absolute top-0 left-0 font-medium tracking-[0.3px] animate-shake">{errors.participant}</span>}
                                 </div>
                             </div>
-                        )}
-                    </div>
+                        ) : (
+                            <div className="w-full h-full text-left p-1.25 flex flex-col justify-start items-start pt-2">
+                                <h2 className="text-[25px] md:text-[28px] font-gill font-bold mb-10 event-title uppercase text-center w-full tracking-wider">
+                                    REGISTER FOR AN EVENT
+                                </h2>
+                                <div className="w-full flex flex-col gap-10">
+                                    <div className="flex flex-col gap-2">
+                                        <label className="text-white font-gill text-[16px] md:text-[18px] font-medium text-left uppercase tracking-wider opacity-90">
+                                            EVENT CATEGORY
+                                        </label>
+                                        <select
+                                            name="eventCategory"
+                                            value={formData.eventCategory}
+                                            onChange={handleChange}
+                                            className={`rounded-md px-4 py-2.5 text-white font-gill text-[15px] w-full outline-none transition-all duration-300 custom-select cursor-pointer focus:border-white/40 ${errors.eventCategory ? 'border-[#ff4d4d] !border-solid' : ''}`}
+                                        >
+                                            <option value="" className="bg-[#0d1321]">---</option>
+                                            {Object.keys(eventData).map(cat => (
+                                                <option key={cat} value={cat} className="bg-[#0d1321]">{cat}</option>
+                                            ))}
+                                        </select>
+                                        {errors.eventCategory && <span className="text-[#ff4d4d] text-[11px] font-gill font-medium tracking-[0.3px] mt-1">{errors.eventCategory}</span>}
+                                    </div>
+
+                                    <div className="flex flex-col gap-2">
+                                        <label className="text-white font-gill text-[16px] md:text-[18px] font-medium text-left uppercase tracking-wider opacity-90">
+                                            EVENT NAME
+                                        </label>
+                                        <select
+                                            name="eventName"
+                                            value={formData.eventName}
+                                            onChange={handleChange}
+                                            disabled={!formData.eventCategory}
+                                            className={`rounded-md px-4 py-2.5 text-white font-gill text-[15px] w-full outline-none transition-all duration-300 custom-select cursor-pointer focus:border-white/40 disabled:opacity-50 disabled:cursor-not-allowed ${errors.eventName ? 'border-[#ff4d4d] !border-solid' : ''}`}
+                                        >
+                                            <option value="" className="bg-[#0d1321]">---</option>
+                                            {formData.eventCategory && eventData[formData.eventCategory].map(evt => (
+                                                <option key={evt} value={evt} className="bg-[#0d1321]">{evt}</option>
+                                            ))}
+                                        </select>
+                                        {errors.eventName && <span className="text-[#ff4d4d] text-[11px] font-gill font-medium tracking-[0.3px] mt-1">{errors.eventName}</span>}
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                        }
+                    </div >
 
                     <button
-                        className="absolute bottom-[27%] left-1/2 -translate-x-1/2 z-30 transition-transform duration-200 hover:scale-105 active:scale-95 outline-none focus:outline-none cursor-pointer max-[480px]:bottom-[16%]"
+                        className="absolute bottom-[28.5%] left-1/2 -translate-x-1/2 z-30 transition-transform duration-200 hover:scale-105 active:scale-95 outline-none focus:outline-none cursor-pointer max-[480px]:bottom-[17%]"
                         onClick={handleNext}
                     >
                         <img src={nextButton} alt="Next" className="w-37.5 h-auto border-none outline-none" />
                     </button>
-                </div>
-            </div>
-        </div>
+                </div >
+            </div >
+        </div >
     )
 }
 

@@ -34,4 +34,38 @@
         background-repeat: no-repeat;
         z-index: -1;
     }
+
+    @keyframes formReveal {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-formSlow {
+        animation: formReveal 1.8s ease-in-out forwards;
+    }
+
+    .event-title {
+        color: #ffffff;
+        letter-spacing: 2px;
+    }
+
+    .custom-select {
+        appearance: none;
+        background-image:
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"),
+            linear-gradient(#0d192d, #0d192d),
+            linear-gradient(to right, #4a3fad, #216d7d);
+        background-repeat: no-repeat, no-repeat, no-repeat;
+        background-position: right 12px center, center, center;
+        background-size: 16px, 100% 100%, 100% 100%;
+        background-origin: padding-box, padding-box, border-box;
+        border: 2px solid transparent !important;
+    }
 }
