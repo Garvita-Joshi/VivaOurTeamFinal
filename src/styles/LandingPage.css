@@ -14,7 +14,10 @@
     justify-content: center;
     align-items: center;
     background-color: #FDDEC0;
-    overflow: hidden;
+    overflow: visible;
+    /* Changed from hidden to allow upwards overlap */
+    z-index: 50;
+    /* Ensure it overlaps Section 1 and Section 2 */
 }
 
 .reveal-container {
@@ -29,13 +32,15 @@
 .reveal-item {
     grid-area: 1 / 1;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     opacity: 0;
     pointer-events: none;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: visible;
+    margin-top: 0vh;
+    /* Aligned with gate assembly */
 }
 
 .reveal-item[style*="opacity: 1"],
@@ -51,8 +56,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 20;
+    z-index: 60;
+    /* Higher than jugnoo ground and shops */
     pointer-events: none;
+    margin-top: 0vh;
+    /* Move the whole assembly slightly down to reduce bottom skin space */
+    overflow: visible;
 }
 
 /* The container for the door/gate - now full screen for unconfined zoom */
@@ -75,6 +84,11 @@
     object-fit: cover;
     z-index: 1;
     display: block;
+    width: 96%;
+    height: auto;
+    position: relative;
+    top: -23.5vh;
+    /* Restored original vertical offset to match assets */
 }
 
 .door-canvas-wrapper {
@@ -84,12 +98,14 @@
 }
 
 .gate-visual {
-    width: 100%;
-    height: 100%;
+    width: 98%;
+    height: auto;
     object-fit: cover;
     transform-origin: center center;
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+    translate: 18px -23.5vh;
+    /* Perfectly synced with bg-door-frame to remove gaps and prevent drift */
 }
 
 .zoom-overlay {

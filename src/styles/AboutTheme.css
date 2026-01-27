@@ -1,6 +1,6 @@
 .about-theme-section {
     width: 100%;
-    min-height: 100vh;
+    min-height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +14,7 @@
     position: relative;
     width: 100%;
     max-width: 1600px;
-    height: 95vh;
+    height: 85vh;
     max-height: 950px;
     min-height: auto;
     background-size: 100% 100%;

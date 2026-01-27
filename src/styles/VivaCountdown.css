@@ -2,79 +2,349 @@
 
 .countdown-section {
     width: 100%;
-    min-height: 50vh;
-    background-color: #061b33;
-    /* Dark Navy Blue */
+    height: 100vh;
+    background: linear-gradient(180deg, #1a0b2e 0%, #301b5e 50%, #4a2a8a 100%);
+    position: relative;
+    overflow: visible;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
+}
+
+.viva-main-wrapper {
+    width: 100%;
+    position: relative;
+    overflow: visible;
+}
+
+/* Navigation Bar */
+.countdown-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 100px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.viva-main-logo {
+    height: 140px;
+    margin-top: 20px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.nav-center {
+    display: flex;
+    gap: 6rem;
+    margin-left: -90px;
+}
+
+.nav-center a {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Gill Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-center a:hover {
+    color: #ffd700;
+    transform: translateY(-2px);
+}
+
+.register-btn-styled {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.register-btn-styled img {
+    height: 35px;
+    object-fit: contain;
+}
+
+.register-btn-styled:hover {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* Carnival Scene */
+.carnival-scene {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background: radial-gradient(circle at center, rgba(147, 51, 234, 0.2) 0%, transparent 70%);
+}
+
+/* Billboard Styles */
+.billboard-container {
+    position: absolute;
+    bottom: -6vh;
+    left: 18%;
+    width: 95%;
+    max-width: 1000px;
+    z-index: 10;
+    transition: transform 0.5s ease;
+}
+
+.billboard-bg {
+    width: 100%;
+    filter: drop-shadow(0 0 60px rgba(255, 140, 0, 0.6));
+}
+
+.timer-overlay {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.timer-title {
+    font-family: 'Rum Raisin', sans-serif;
+    font-size: 3rem;
+    color: #8b0000;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 1px;
+}
+
+.timer-display {
+    display: flex;
     justify-content: center;
     align-items: center;
-    padding: 4rem 2rem;
-    position: relative;
-    overflow: hidden;
-    color: #ffffff;
-}
-
-/* Optional: Add some Rajasthani pattern or subtle texture */
-.countdown-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    opacity: 0.1;
-    background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png');
-    /* Subtle texture */
-    pointer-events: none;
-}
-
-.countdown-title {
-    font-family: 'Gill Sans', sans-serif;
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 3rem;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.countdown-timer {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 10px;
 }
 
 .timer-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 120px;
+    gap: 2px;
 }
 
-.timer-value {
-    font-size: 4rem;
-    font-weight: 800;
+.timer-item .label {
+    font-family: 'Rum Raisin', sans-serif;
+    color: #c98c3e;
+    font-size: 1.5rem;
     line-height: 1;
-    font-family: 'Gill Sans', sans-serif;
 }
 
-.timer-label {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 0.5rem;
-    opacity: 0.8;
+.timer-item .val {
+    font-family: 'Rum Raisin', sans-serif;
+    font-size: 3.5rem;
+    color: #c98c3e;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    line-height: 1;
 }
 
-@media (max-width: 768px) {
-    .countdown-title {
+.timer-display .sep {
+    font-family: 'Rum Raisin', sans-serif;
+    font-size: 2.5rem;
+    color: #c98c3e;
+    margin-top: 1.5rem;
+    /* Offset to align with numbers, not labels */
+}
+
+/* Shops Area */
+.shops-container {
+    width: 100%;
+    position: absolute;
+    bottom: -5vh;
+    /* Shifted down */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+}
+
+.shops-img {
+    width: 107vw !important;
+    min-width: 107vw !important;
+    max-width: none !important;
+    height: auto !important;
+    margin-bottom: -21vh !important;
+    /* Negative margin to decrease space further */
+    display: block;
+    z-index: 20;
+}
+
+.jugnoo-ground-container {
+    width: 100%;
+    position: relative;
+    margin-top: -40vh;
+    margin-bottom: 0;
+    /* Removed extra spacing */
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.jugnoo-ground-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    transform: translateY(40vh);
+}
+
+/* Ferris Wheel Styles */
+.ferris-wheel-container {
+    position: absolute;
+    right: 7%;
+    bottom: 25vh;
+    /* Adjusted to sit behind shops somewhat */
+    width: 25vw;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.ferris-wheel-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    /* Optional: Add slow rotation if desired, but keeping static for now */
+    /* animation: wheelRotate 60s linear infinite; */
+}
+
+/* Bottom Decorative Image */
+.bottom-img-container {
+    position: absolute;
+    bottom: 18vh;
+    left: 0;
+    width: 100%;
+    z-index: 40;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    pointer-events: none;
+}
+
+/* Transition Section (Second "Page") */
+.transition-section {
+    position: relative;
+    min-height: 80vh;
+    /* Increased to allow space for margins */
+    background: linear-gradient(180deg, #4a2a8a 0%, #1a0b2e 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bottom-desc-img {
+    width: 100%;
+    height: auto;
+    max-height: 20vh;
+    /* Don't take up too much height */
+    object-fit: cover;
+}
+
+
+@keyframes swing {
+
+    0%,
+    100% {
+        transform: rotate(-5deg);
+        transform-origin: top center;
+    }
+
+    50% {
+        transform: rotate(5deg);
+        transform-origin: top center;
+    }
+}
+
+
+
+@media (max-width: 1200px) {
+    .billboard-container {
+        width: 500px;
+    }
+
+    .timer-title {
         font-size: 2rem;
     }
 
-    .timer-value {
-        font-size: 2.5rem;
+    .timer-values .val {
+        font-size: 3.5rem;
     }
 
-    .timer-item {
-        min-width: 80px;
+    .ferris-wheel-container {
+        width: 30vw;
+        bottom: 20vh;
+    }
+}
+
+@media (max-width: 1024px) {
+    .nav-center {
+        display: none;
+    }
+
+    .billboard-container {
+        top: 18vh;
+        width: 450px;
+    }
+
+    .scene-rickshaw {
+        width: 140px;
+        left: 5%;
+    }
+
+    .ferris-wheel-container {
+        width: 35vw;
+        bottom: 20vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .countdown-nav {
+        padding: 1rem 20px;
+    }
+
+    .viva-main-logo {
+        height: 45px;
+    }
+
+    .billboard-container {
+        width: 90%;
+        max-width: 400px;
+        top: 15vh;
+    }
+
+    .timer-title {
+        font-size: 1.6rem;
+    }
+
+    .timer-values .val {
+        font-size: 2.8rem;
+    }
+
+    .timer-values .sep {
+        font-size: 2.2rem;
+    }
+
+    .register-btn-styled img {
+        height: 35px;
+    }
+
+    .ferris-wheel-container {
+        width: 50vw;
+        right: -10%;
+        /* Hide partially on very small screens? Or keep visible */
+        bottom: 15vh;
     }
 }
