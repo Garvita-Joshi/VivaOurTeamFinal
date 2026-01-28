@@ -5,7 +5,6 @@ import Lenis from 'lenis';
 import VivaCountdown from '../components/LandingPage/VivaCountdown';
 import AboutViva from '../components/LandingPage/AboutViva';
 import AboutTheme from '../components/LandingPage/AboutTheme';
-import bgDoor from '../assets/landingPage/bgDoor.png';
 import '../styles/LandingPage.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -93,7 +92,7 @@ const LandingPage = () => {
                 }
             });
 
-            // 1. Scrub through frames immediately
+            // 1. Scrub through frames
             tl.to(frameState, {
                 index: totalFrames - 1,
                 ease: "power2.out",
@@ -103,10 +102,10 @@ const LandingPage = () => {
                 }
             }, 0);
 
-            // 2. Zoom gate effect - Start from 1.15 to zoom in slightly less on the gate structure
+            // 2. Zoom gate effect
             gsap.set(canvasRef.current, { scale: 1.15 });
             tl.to(canvasRef.current, {
-                scale: 18, // Increased for a more immersive zoom
+                scale: 18,
                 duration: 6,
                 ease: "power2.in"
             }, 0);
@@ -118,13 +117,10 @@ const LandingPage = () => {
                 0
             );
 
-            // 4. Reveal "hole" in the gate: (Transition logic)
-
-            // 5. Short Pause for About Viva (The "Peak" moment)
+            // 4. Short Pause for About Viva
             tl.to({}, { duration: 2 });
 
-            // 6. Transition from About Viva to About Theme
-            // Content zooms out slightly while fading
+            // 5. Transition from About Viva to About Theme
             tl.to(aboutVivaRef.current, {
                 opacity: 0,
                 scale: 1.1,
@@ -137,13 +133,12 @@ const LandingPage = () => {
                 { opacity: 1, scale: 1, y: 0, duration: 2, ease: "power2.out" }
             );
 
-            // 7. Short Pause for About Theme
+            // 6. Short Pause
             tl.to({}, { duration: 2 });
 
-            // 8. Exit Transition (Zoom Out & Gate Close)
+            // 7. Exit Transition
             const exitStartTime = tl.duration();
 
-            // Synchronized Zoom Out and Frame Close
             tl.to(canvasRef.current, {
                 scale: 1,
                 duration: 6,
@@ -159,15 +154,14 @@ const LandingPage = () => {
                 }
             }, exitStartTime);
 
-            // SNEAK PEEK EXIT: Keep AboutTheme visible and fade it out SLOWLY as doors close
             tl.to(aboutThemeRef.current, {
                 opacity: 0,
-                scale: 0.8, // Zoom away into the distance
+                scale: 0.8,
                 duration: 5,
                 ease: "power1.in"
             }, exitStartTime);
 
-            // Ensure everything is reset at the very end
+            // Reset
             tl.to({}, { duration: 0.5 });
 
         }, mainRef);

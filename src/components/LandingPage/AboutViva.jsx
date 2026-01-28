@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import bgAbout from '../../assets/landingPage/bgAbout.png';
+import woodFrame from '../../assets/landingPage/woodFrame.png';
 import aboutVivaTitle from '../../assets/landingPage/aboutViva.png';
 import leftHand from '../../assets/landingPage/leftHand.png';
 import rightHand from '../../assets/landingPage/rightHand.png';
@@ -69,8 +70,33 @@ const AboutViva = () => {
                     <div
                         className="about-card"
                         ref={cardRef}
-                        style={{ backgroundImage: `url(${bgAbout})` }}
+                        style={{
+                            background: 'linear-gradient(180deg, #841457 0%, #DA2828 100%)',
+                            WebkitMaskImage: `url(${bgAbout})`,
+                            maskImage: `url(${bgAbout})`,
+                            WebkitMaskSize: '100% 100%',
+                            maskSize: '100% 100%',
+                            WebkitMaskRepeat: 'no-repeat',
+                            maskRepeat: 'no-repeat'
+                        }}
                     >
+                        {/* Wood Frame Overlay */}
+                        <img
+                            src={woodFrame}
+                            alt="Frame"
+                            style={{
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                width: '90%',
+                                height: '90%',
+                                objectFit: 'fill',
+                                zIndex: 5,
+                                pointerEvents: 'none'
+                            }}
+                        />
+
                         {/* Hanging Nimbu Mirchi */}
                         <div className="hanging-decor left">
                             <img src={nimbuMirchi} alt="nimbu-mirchi" className="nimbu-mirchi" />

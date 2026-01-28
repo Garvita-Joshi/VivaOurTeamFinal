@@ -118,3 +118,53 @@ body,
     opacity: 0;
     pointer-events: none;
 }
+.shared-info-card {
+    width: 90%;
+    max-width: 1400px;
+    height: 85vh;
+    max-height: 900px;
+    position: relative;
+    /* Center it */
+    display: grid;
+    place-items: center;
+    /* Shared Background Styles */
+    background: linear-gradient(180deg, #841457 0%, #DA2828 100%);
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+.shared-info-card > * {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: 100%;
+}
+
+.card-frame {
+    width: 90% !important;
+    height: 90% !important;
+    pointer-events: none;
+    z-index: 20;
+    align-self: center;
+    justify-self: center;
+    object-fit: fill;
+}
+
+.info-content-layer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    opacity: 0; 
+}
+
+/* Ensure inner components fit */
+.info-content-layer > section {
+    width: 100%;
+    height: 100%;
+    background: transparent !important; 
+    padding: 0 !important;
+}
