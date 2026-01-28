@@ -22,10 +22,8 @@ const LandingPage = () => {
     const mainRef = useRef(null);
     const triggerRef = useRef(null);
     const canvasRef = useRef(null);
-    const stampRef = useRef(null);
     const aboutVivaRef = useRef(null);
     const aboutThemeRef = useRef(null);
-    const bgDoorRef = useRef(null);
     const zoomOverlayRef = useRef(null);
 
     // Image preloading and canvas rendering
@@ -88,7 +86,7 @@ const LandingPage = () => {
                 scrollTrigger: {
                     trigger: triggerRef.current,
                     start: "top top",
-                    end: "+=500%",
+                    end: "+=400%",
                     pin: true,
                     scrub: 1.2,
                     anticipatePin: 1
@@ -119,13 +117,7 @@ const LandingPage = () => {
                 0
             );
 
-            // 4. Reveal "hole" in the gate: Fade out ONLY the blue background img
-            // This keeps the gate frames visible while showing the content behind them
-            tl.to(bgDoorRef.current, {
-                opacity: 0,
-                duration: 2,
-                ease: "power2.out"
-            }, 0);
+            // 4. Reveal "hole" in the gate: (Transition logic)
 
             // 5. Short Pause for About Viva (The "Peak" moment)
             tl.to({}, { duration: 2 });
@@ -174,18 +166,8 @@ const LandingPage = () => {
                 ease: "power1.in"
             }, exitStartTime);
 
-            // Bring back the dark blue background ONLY at the very last second of closing
-            tl.to(bgDoorRef.current, {
-                opacity: 1,
-                duration: 2,
-                ease: "power2.in"
-            }, exitStartTime + 4);
-
             // Ensure everything is reset at the very end
-            tl.to(stampRef.current, {
-                opacity: 1,
-                duration: 0.5
-            });
+            tl.to({}, { duration: 0.5 });
 
         }, mainRef);
 
@@ -215,19 +197,11 @@ const LandingPage = () => {
 
                 {/* The Stamp Interface */}
                 <div className="stamp-assembly">
-                    <div className="white-stamp-container" ref={stampRef}>
-                        <img
-                            ref={bgDoorRef}
-                            src={bgDoor}
-                            alt="Door Background"
-                            className="bg-door-frame"
+                    <div className="door-canvas-wrapper">
+                        <canvas
+                            ref={canvasRef}
+                            className="gate-visual"
                         />
-                        <div className="door-canvas-wrapper">
-                            <canvas
-                                ref={canvasRef}
-                                className="gate-visual"
-                            />
-                        </div>
                     </div>
                 </div>
 

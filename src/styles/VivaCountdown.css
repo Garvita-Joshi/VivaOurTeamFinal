@@ -100,13 +100,48 @@
     filter: drop-shadow(0 0 60px rgba(255, 140, 0, 0.6));
 }
 
-.timer-overlay {
+.timer-flip-wrapper {
     position: absolute;
     top: 38%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center;
     width: 90%;
+    perspective: 1000px;
+    z-index: 15;
+}
+
+.timer-flip-inner {
+    position: relative;
+    width: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.timer-flip-wrapper.is-flipped .timer-flip-inner {
+    transform: rotateY(180deg);
+}
+
+.timer-flip-front,
+.timer-flip-back {
+    width: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.timer-flip-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.timer-overlay {
+    text-align: center;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -114,7 +149,7 @@
 
 .timer-title {
     font-family: 'Rum Raisin', sans-serif;
-    font-size: 3rem;
+    font-size: 3.5rem;
     color: #8b0000;
     margin: 0;
     line-height: 1;
@@ -139,13 +174,13 @@
 .timer-item .label {
     font-family: 'Rum Raisin', sans-serif;
     color: #c98c3e;
-    font-size: 1.5rem;
+    font-size: 2rem;
     line-height: 1;
 }
 
 .timer-item .val {
     font-family: 'Rum Raisin', sans-serif;
-    font-size: 3.5rem;
+    font-size: 5rem;
     color: #c98c3e;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     line-height: 1;
@@ -153,7 +188,7 @@
 
 .timer-display .sep {
     font-family: 'Rum Raisin', sans-serif;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     color: #c98c3e;
     margin-top: 1.5rem;
     /* Offset to align with numbers, not labels */
@@ -279,7 +314,7 @@
         font-size: 2rem;
     }
 
-    .timer-values .val {
+    .timer-display .val {
         font-size: 3.5rem;
     }
 
@@ -329,11 +364,11 @@
         font-size: 1.6rem;
     }
 
-    .timer-values .val {
+    .timer-display .val {
         font-size: 2.8rem;
     }
 
-    .timer-values .sep {
+    .timer-display .sep {
         font-size: 2.2rem;
     }
 

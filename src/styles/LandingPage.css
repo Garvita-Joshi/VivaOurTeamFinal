@@ -18,6 +18,7 @@
     /* Changed from hidden to allow upwards overlap */
     z-index: 50;
     /* Ensure it overlaps Section 1 and Section 2 */
+    margin-top: -30vh;
 }
 
 .reveal-container {
@@ -59,53 +60,30 @@
     z-index: 60;
     /* Higher than jugnoo ground and shops */
     pointer-events: none;
-    margin-top: 0vh;
-    /* Move the whole assembly slightly down to reduce bottom skin space */
+    margin-top: -50;
+    /* Margin moved to parent container for earlier scroll triggering */
     overflow: visible;
 }
 
-/* The container for the door/gate - now full screen for unconfined zoom */
-.white-stamp-container {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    z-index: 10;
-}
 
-/* Common stacking logic for children */
-.white-stamp-container>* {
-    grid-area: 1 / 1;
-    width: 100%;
-    height: 100%;
-}
-
-.bg-door-frame {
-    object-fit: cover;
-    z-index: 1;
-    display: block;
-    width: 96%;
-    height: auto;
-    position: relative;
-    top: -23.5vh;
-    /* Restored original vertical offset to match assets */
-}
 
 .door-canvas-wrapper {
     position: absolute;
     inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 2;
 }
 
 .gate-visual {
-    width: 98%;
-    height: auto;
+    width: 172vw;
+    height: 172vh;
     object-fit: cover;
     transform-origin: center center;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    translate: 18px -23.5vh;
-    /* Perfectly synced with bg-door-frame to remove gaps and prevent drift */
+    image-rendering: auto;
+    margin-top: -12vh;
+    border: 2px solid #FDDEC0;
 }
 
 .zoom-overlay {
@@ -115,26 +93,4 @@
     z-index: 15;
     opacity: 0;
     pointer-events: none;
-}
-
-@media (max-width: 768px) {
-    .white-stamp-container {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-        padding: 0;
-        /* Full screen on very small mobile? Or keep border? */
-    }
-
-    .white-stamp-container {
-        /* User asked for 92% previously, let's keep it consistent or adapt */
-        width: 92%;
-        height: 92%;
-        border-radius: 20px;
-        padding: 8px;
-    }
-
-    .white-stamp-container>* {
-        border-radius: 14px;
-    }
 }

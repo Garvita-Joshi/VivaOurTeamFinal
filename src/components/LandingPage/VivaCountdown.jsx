@@ -17,6 +17,7 @@ const VivaCountdown = () => {
         minutes: 0,
         seconds: 0
     });
+    const [isFlipped, setIsFlipped] = useState(false);
 
     useEffect(() => {
         const targetDate = new Date('2026-02-06T00:00:00').getTime();
@@ -37,6 +38,13 @@ const VivaCountdown = () => {
         }, 1000);
 
         return () => clearInterval(timer);
+    }, []);
+
+    useEffect(() => {
+        const flipTimer = setInterval(() => {
+            setIsFlipped(prev => !prev);
+        }, 6000); // Toggle every 6 seconds
+        return () => clearInterval(flipTimer);
     }, []);
 
     return (
@@ -70,22 +78,33 @@ const VivaCountdown = () => {
                     <div className="billboard-container">
                         <img src={billBoard} alt="Billboard" className="billboard-bg" />
 
-                        <div className="timer-overlay">
-                            <h2 className="timer-title">VIVACITY BEGINS IN</h2>
-                            <div className="timer-display">
-                                <div className="timer-item">
-                                    <span className="label">DAYS</span>
-                                    <span className="val">{String(timeLeft.days).padStart(2, '0')}</span>
+                        <div className={`timer-flip-wrapper ${isFlipped ? 'is-flipped' : ''}`}>
+                            <div className="timer-flip-inner">
+                                <div className="timer-flip-front">
+                                    <div className="timer-overlay">
+                                        <h2 className="timer-title">VIVACITY BEGINS IN</h2>
+                                        <div className="timer-display">
+                                            <div className="timer-item">
+                                                <span className="label">DAYS</span>
+                                                <span className="val">{String(timeLeft.days).padStart(2, '0')}</span>
+                                            </div>
+                                            <span className="sep">:</span>
+                                            <div className="timer-item">
+                                                <span className="label">HOURS</span>
+                                                <span className="val">{String(timeLeft.hours).padStart(2, '0')}</span>
+                                            </div>
+                                            <span className="sep">:</span>
+                                            <div className="timer-item">
+                                                <span className="label">MINS</span>
+                                                <span className="val">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <span className="sep">:</span>
-                                <div className="timer-item">
-                                    <span className="label">HOURS</span>
-                                    <span className="val">{String(timeLeft.hours).padStart(2, '0')}</span>
-                                </div>
-                                <span className="sep">:</span>
-                                <div className="timer-item">
-                                    <span className="label">MINS</span>
-                                    <span className="val">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                                <div className="timer-flip-back">
+                                    <div className="timer-overlay">
+                                        <h2 className="timer-title">Sponsered By :</h2>
+                                    </div>
                                 </div>
                             </div>
                         </div>
