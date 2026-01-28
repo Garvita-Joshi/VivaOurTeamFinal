@@ -5,19 +5,22 @@
     height: 100vh;
     background: linear-gradient(180deg, #1a0b2e 0%, #301b5e 50%, #4a2a8a 100%);
     position: relative;
-    overflow: visible;
+    overflow: hidden;
+    /* Changed from visible to prevent background bleed over the gate */
     color: #ffffff;
     display: flex;
     flex-direction: column;
+    z-index: 1;
+    /* Lower than the gate transition */
 }
 
 .viva-main-wrapper {
     width: 100%;
     position: relative;
-    overflow: visible;
+    overflow: hidden;
+    z-index: 1;
 }
 
-/* Navigation Bar */
 .countdown-nav {
     display: flex;
     justify-content: space-between;
@@ -30,7 +33,8 @@
 }
 
 .viva-main-logo {
-    height: 140px;
+    height: clamp(60px, 10vw, 140px);
+    /* Responsive height */
     margin-top: 20px;
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
@@ -47,7 +51,7 @@
     text-decoration: none;
     font-family: 'Gill Sans', sans-serif;
     font-weight: 600;
-    font-size: 1.2rem;
+    font-size: clamp(0.9rem, 1.1vw, 1.2rem);
     letter-spacing: 2px;
     transition: all 0.3s;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -74,7 +78,6 @@
     transform: scale(1.1) rotate(2deg);
 }
 
-/* Carnival Scene */
 .carnival-scene {
     flex: 1;
     position: relative;
@@ -84,15 +87,15 @@
     background: radial-gradient(circle at center, rgba(147, 51, 234, 0.2) 0%, transparent 70%);
 }
 
-/* Billboard Styles */
 .billboard-container {
     position: absolute;
-    bottom: -6vh;
-    left: 18%;
-    width: 95%;
-    max-width: 1000px;
+    bottom: -1vh;
+    /* Shifted up from -6vh */
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(300px, 60vw, 1200px);
     z-index: 10;
-    transition: transform 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .billboard-bg {
@@ -149,7 +152,8 @@
 
 .timer-title {
     font-family: 'Rum Raisin', sans-serif;
-    font-size: 3.5rem;
+    font-size: clamp(1.2rem, 3.5vw, 4rem);
+    /* Lowered min and scaled factor */
     color: #8b0000;
     margin: 0;
     line-height: 1;
@@ -174,13 +178,15 @@
 .timer-item .label {
     font-family: 'Rum Raisin', sans-serif;
     color: #c98c3e;
-    font-size: 2rem;
-    line-height: 1;
+    font-size: clamp(0.7rem, 2vw, 2.5rem);
+    /* Lowered min */
+    line-height: 1.2;
 }
 
 .timer-item .val {
     font-family: 'Rum Raisin', sans-serif;
-    font-size: 5rem;
+    font-size: clamp(1.8rem, 5.5vw, 6rem);
+    /* Lowered min and scaled factor */
     color: #c98c3e;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     line-height: 1;
@@ -188,18 +194,16 @@
 
 .timer-display .sep {
     font-family: 'Rum Raisin', sans-serif;
-    font-size: 3.5rem;
+    font-size: clamp(1.2rem, 3.5vw, 4rem);
+    /* Lowered min */
     color: #c98c3e;
     margin-top: 1.5rem;
-    /* Offset to align with numbers, not labels */
 }
 
-/* Shops Area */
 .shops-container {
     width: 100%;
     position: absolute;
     bottom: -5vh;
-    /* Shifted down */
     left: 50%;
     transform: translateX(-50%);
     z-index: 20;
@@ -212,18 +216,25 @@
     min-width: 107vw !important;
     max-width: none !important;
     height: auto !important;
-    margin-bottom: -21vh !important;
-    /* Negative margin to decrease space further */
+    margin-bottom: -15vh !important;
+    /* Reduced from -21vh */
     display: block;
     z-index: 20;
+}
+
+@media (max-width: 768px) {
+    .shops-img {
+        margin-bottom: -10vh !important;
+        /* Even less on mobile to prevent excessive overlapping or gaps */
+    }
 }
 
 .jugnoo-ground-container {
     width: 100%;
     position: relative;
-    margin-top: -40vh;
+    margin-top: -30vh;
+    /* Adjusted from -40vh */
     margin-bottom: 0;
-    /* Removed extra spacing */
     display: flex;
     justify-content: center;
     pointer-events: none;
@@ -234,15 +245,41 @@
     width: 100%;
     height: auto;
     object-fit: contain;
-    transform: translateY(40vh);
+    transform: translateY(30vh);
+    /* Matches margin-top */
 }
 
-/* Ferris Wheel Styles */
+@media (max-width: 1200px) {
+    .jugnoo-ground-container {
+        margin-top: -18vh;
+        /* Reduced from -25vh */
+    }
+
+    .jugnoo-ground-img {
+        transform: translateY(18vh);
+    }
+}
+
+@media (max-width: 1024px) {
+    .jugnoo-ground-container {
+        margin-top: -12vh;
+        /* Reduced from -20vh */
+    }
+
+    .jugnoo-ground-img {
+        transform: translateY(12vh);
+    }
+}
+
+@media (max-width: 768px) {
+    /* Values moved to the main mobile media query block at the end of the file */
+}
+
 .ferris-wheel-container {
     position: absolute;
     right: 7%;
-    bottom: 25vh;
-    /* Adjusted to sit behind shops somewhat */
+    bottom: 20vh;
+    /* Shifted down from 25vh */
     width: 25vw;
     z-index: 10;
     pointer-events: none;
@@ -252,11 +289,8 @@
     width: 100%;
     height: auto;
     object-fit: contain;
-    /* Optional: Add slow rotation if desired, but keeping static for now */
-    /* animation: wheelRotate 60s linear infinite; */
 }
 
-/* Bottom Decorative Image */
 .bottom-img-container {
     position: absolute;
     bottom: 18vh;
@@ -269,22 +303,28 @@
     pointer-events: none;
 }
 
-/* Transition Section (Second "Page") */
 .transition-section {
     position: relative;
-    min-height: 80vh;
-    /* Increased to allow space for margins */
+    min-height: 40vh;
+    /* Reduced from 80vh to eliminate the gap */
     background: linear-gradient(180deg, #4a2a8a 0%, #1a0b2e 100%);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 1;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .transition-section {
+        min-height: 30vh;
+    }
 }
 
 .bottom-desc-img {
     width: 100%;
     height: auto;
     max-height: 20vh;
-    /* Don't take up too much height */
     object-fit: cover;
 }
 
@@ -305,22 +345,25 @@
 
 
 
+@media (max-width: 1300px) {
+    .ferris-wheel-container {
+        bottom: 12vh;
+        /* Shifted down from 18vh */
+    }
+}
+
 @media (max-width: 1200px) {
     .billboard-container {
-        width: 500px;
-    }
-
-    .timer-title {
-        font-size: 2rem;
-    }
-
-    .timer-display .val {
-        font-size: 3.5rem;
+        width: 70vw;
+        bottom: -8vh;
+        /* Shifted down from -6vh */
+        left: 50%;
     }
 
     .ferris-wheel-container {
         width: 30vw;
-        bottom: 20vh;
+        bottom: 8vh;
+        /* Shifted down from 15vh */
     }
 }
 
@@ -330,8 +373,11 @@
     }
 
     .billboard-container {
-        top: 18vh;
-        width: 450px;
+        top: auto;
+        bottom: -10vh;
+        /* Shifted down from 10vh */
+        width: 80vw;
+        left: 50%;
     }
 
     .scene-rickshaw {
@@ -341,45 +387,58 @@
 
     .ferris-wheel-container {
         width: 35vw;
-        bottom: 20vh;
+        bottom: 2vh;
+        /* Shifted even further down from 5vh */
     }
 }
 
 @media (max-width: 768px) {
     .countdown-nav {
-        padding: 1rem 20px;
+        padding: 1.5rem 20px;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        text-align: center;
     }
 
     .viva-main-logo {
-        height: 45px;
+        margin-top: 0;
+        height: 80px;
+        /* Slightly larger to be prominent */
     }
 
     .billboard-container {
-        width: 90%;
-        max-width: 400px;
-        top: 15vh;
-    }
-
-    .timer-title {
-        font-size: 1.6rem;
-    }
-
-    .timer-display .val {
-        font-size: 2.8rem;
-    }
-
-    .timer-display .sep {
-        font-size: 2.2rem;
+        width: 95vw;
+        max-width: none;
+        left: 50%;
+        bottom: 28vh;
+        /* Shifted down slightly */
+        top: auto;
     }
 
     .register-btn-styled img {
-        height: 35px;
+        height: 40px;
+        /* More clickable on mobile */
     }
 
     .ferris-wheel-container {
-        width: 50vw;
-        right: -10%;
-        /* Hide partially on very small screens? Or keep visible */
-        bottom: 15vh;
+        width: 45vw;
+        right: -2%;
+        bottom: 30vh;
+        /* Shifted higher up with the billboard */
+    }
+
+    .shops-img {
+        margin-bottom: 25vh !important;
+        /* Pushed imagery up to eliminate top space */
+    }
+
+    .jugnoo-ground-container {
+        margin-top: -5vh;
+        /* Further reduced from -10vh to shift ground lower */
+    }
+
+    .jugnoo-ground-img {
+        transform: translateY(5vh);
     }
 }

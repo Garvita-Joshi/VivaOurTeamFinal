@@ -86,7 +86,7 @@ const LandingPage = () => {
                 scrollTrigger: {
                     trigger: triggerRef.current,
                     start: "top top",
-                    end: "+=400%",
+                    end: "+=150%",
                     pin: true,
                     scrub: 1.2,
                     anticipatePin: 1
@@ -96,16 +96,17 @@ const LandingPage = () => {
             // 1. Scrub through frames immediately
             tl.to(frameState, {
                 index: totalFrames - 1,
-                ease: "none",
-                duration: 6,
+                ease: "power2.out",
+                duration: 0.8,
                 onUpdate: () => {
                     renderFrame(frameState.index);
                 }
             }, 0);
 
-            // 2. Zoom gate effect
+            // 2. Zoom gate effect - Start from 1.15 to zoom in slightly less on the gate structure
+            gsap.set(canvasRef.current, { scale: 1.15 });
             tl.to(canvasRef.current, {
-                scale: 15,
+                scale: 18, // Increased for a more immersive zoom
                 duration: 6,
                 ease: "power2.in"
             }, 0);

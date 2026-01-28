@@ -1,24 +1,45 @@
 @import "tailwindcss";
 
+/* Global Reset for Fullscreen Landing Page */
+html,
+body,
+#root {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    min-height: 100%;
+    max-width: 100% !important;
+    overflow-x: hidden;
+}
+
 .landing-page-container {
     width: 100%;
+    min-height: 100vh;
     background-color: #FDDEC0;
-    overflow-x: hidden;
+    position: relative;
+    isolation: isolate;
+    /* Creates a new stacking context for its children */
 }
 
 .transition-container {
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    width: 100vw !important;
+    height: 100vh !important;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #FDDEC0;
-    overflow: visible;
-    /* Changed from hidden to allow upwards overlap */
-    z-index: 50;
-    /* Ensure it overlaps Section 1 and Section 2 */
-    margin-top: -30vh;
+    overflow: hidden;
+    z-index: 9999;
+    /* Massive z-index to stay above everything else */
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .transition-container {
+        margin-top: 0 !important;
+    }
 }
 
 .reveal-container {
@@ -51,18 +72,18 @@
 }
 
 .stamp-assembly {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw !important;
+    height: 100vh !important;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 60;
-    /* Higher than jugnoo ground and shops */
+    z-index: 10000;
+    /* Absolute highest priority */
     pointer-events: none;
-    margin-top: -50;
-    /* Margin moved to parent container for earlier scroll triggering */
-    overflow: visible;
+    overflow: hidden;
 }
 
 
@@ -70,20 +91,23 @@
 .door-canvas-wrapper {
     position: absolute;
     inset: 0;
+    width: 100vw !important;
+    height: 100vh !important;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     z-index: 2;
+    overflow: hidden;
 }
 
 .gate-visual {
-    width: 172vw;
-    height: 172vh;
-    object-fit: cover;
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: cover !important;
     transform-origin: center center;
-    image-rendering: auto;
-    margin-top: -12vh;
-    border: 2px solid #FDDEC0;
+    image-rendering: high-quality;
+    display: block !important;
+    /* Removed initial transform here as it will be managed by GSAP for precision */
 }
 
 .zoom-overlay {
